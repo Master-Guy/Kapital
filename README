@@ -12,3 +12,23 @@ If you do it any other way, it will mess up!
 
 1) Add jar to plugins folder
 2) Enable
+
+-- LAYOUT --
+
+World
+|- Nation
+    |-Country
+    |  |- City
+    |  |   |- Plot
+    |  |   |   |- Owner
+    |  |   |
+    |  |   |- Major
+    |  |   |- Villagers
+    |  |
+    |  |- Council
+    |      |- Chair person
+    |      |- Board members
+    |
+    |- President
+    |- Senate
+    |- Citizens

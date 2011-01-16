@@ -1,3 +1,5 @@
+-- DEV --
+
 If you want to work on the code:
 	1) Let us know in #Kapital
 	2) PULL that file from the repo
@@ -5,3 +7,7 @@ If you want to work on the code:
 	4) Commit that file
 	5) Push that file into the repo
 If you do it any other way, it will mess up!
+
+-- SETUP --
+
+...

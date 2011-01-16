@@ -17,18 +17,28 @@ If you do it any other way, it will mess up!
 
 World
 |- Nation
-    |-Country
-    |  |- City
-    |  |   |- Plot
-    |  |   |   |- Owner
-    |  |   |
-    |  |   |- Major
-    |  |   |- Villagers
-    |  |
-    |  |- Council
-    |      |- Chair person
-    |      |- Board members
+    |- County
+    |   |- City
+    |   |   |- Plot
+    |   |   |   |- Owner
+    |   |   |
+    |   |   |- Inhabitants
+    |   |
+    |   |- Council
+    |       |- Mayor
+    |       |- Councillors
     |
-    |- President
-    |- Senate
+    |- Leader (President, King, etc...)
+    |- Parliament, Senate, etc...
     |- Citizens
+    
+Government types:
+- Republic: No leader. Senate elected every set time period.
+- Democracy: Elections every set time period. President and senate elected.
+- Monarchy: New King/Queen chosen upon abdication or revolution. King/Queen plus parliament.
+- Dictatorship: Absolute power to one person.
+
+On a Nation-wide and City-wide level:
+- Protection
+- Restriction
+- Taxes

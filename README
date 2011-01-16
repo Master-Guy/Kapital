@@ -1,13 +1,33 @@
 -- DEV --
 
 If you want to work on the code:
-	I) Let us know in #Kapital
-	II) PULL that file from the repo
-	III) Make your modifications
-	IV) Commit that file
-	V) Push that file into the repo
+	1) Let us know in #Kapital
+	2) PULL that file from the repo
+	3) Make your modifications
+	4) Commit that file
+	5) Push that file into the repo
 If you do it any other way, it will mess up!
 
 -- SETUP --
 
 1) Add jar to plugins folder
+
+-- LAYOUT --
+
+World
+|- Nation
+    |-Country
+    |  |- City
+    |  |   |- Plot
+    |  |   |   |- Owner
+    |  |   |
+    |  |   |- Major
+    |  |   |- Villagers
+    |  |
+    |  |- Council
+    |      |- Chair person
+    |      |- Board members
+    |
+    |- President
+    |- Senate
+    |- Citizens

@@ -33,12 +33,12 @@ public class Kapital extends JavaPlugin {
     }
 
     public void onEnable() {
-    	log.info(name + " v" + version + " loaded");
         PluginManager pm = getServer().getPluginManager();
+    	log.info("[" + name + "] v" + version + " - Loaded and Enabled");
     }
     
     public void onDisable() {
-    	log.info(name + " v" + version + " disabled");
+    	log.info("[" + name + "] v" + version + " - Disabled");
     }
     
     public boolean isDebugging(final Player player) {

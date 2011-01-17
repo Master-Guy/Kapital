@@ -4,8 +4,15 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+/**
+ * Coordinate handler
+ * Based-off Towny coord.java
+ * 
+ * @author Ant59
+ */
+
 public class Coord {
-	private static int townBlockSize = 16;
+	private static int tileSize = 16;
 	private int x, z;
 	
 	public Coord(int x, int z) {
@@ -49,8 +56,8 @@ public class Coord {
 	
 	public static Coord parseCoord(int x, int z) {
 		return new Coord(
-				x / getTownBlockSize() - (x < 0 ? 1 : 0),
-				z / getTownBlockSize() - (z < 0 ? 1 : 0));
+				x / getTileSize() - (x < 0 ? 1 : 0),
+				z / getTileSize() - (z < 0 ? 1 : 0));
 	}
 	
 	public static Coord parseCoord(Player player) {
@@ -64,16 +71,12 @@ public class Coord {
 	public static Coord parseCoord(Block block) {
 		return parseCoord(block.getX(), block.getZ());
 	}
-	
-	public String toString() {
-		return getX() + "," + getZ();
+
+	public static void setTileSize(int tileSize) {
+		Coord.tileSize = tileSize;
 	}
 
-	public static void setTownBlockSize(int townBlockSize) {
-		Coord.townBlockSize = townBlockSize;
-	}
-
-	public static int getTownBlockSize() {
-		return townBlockSize;
+	public static int getTileSize() {
+		return tileSize;
 	}
 }

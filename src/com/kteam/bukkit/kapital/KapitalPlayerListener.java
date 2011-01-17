@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import org.bukkit.event.player.PlayerListener;
 
 /**
- * Kapital Payer Listener
+ * Kapital Player Listener
  * 
  * @author Ant59 and Master-Guy
  */

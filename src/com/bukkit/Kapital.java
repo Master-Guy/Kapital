@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 
 public class Kapital extends JavaPlugin {
+	// Logger
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);

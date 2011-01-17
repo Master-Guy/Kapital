@@ -1,5 +1,7 @@
 package com.bukkit;
 
+import java.util.logging.Logger;
+
 import org.bukkit.event.block.BlockListener;
 
 /**
@@ -9,15 +11,14 @@ import org.bukkit.event.block.BlockListener;
  */
 
 public class KapitalBlockListener extends BlockListener {
+	// Logger
+	public static final Logger log = Logger.getLogger("Minecraft");
+	
     private final Kapital plugin;
     private int I;
 
     public KapitalBlockListener(final Kapital plugin) {
         this.plugin = plugin;
-    }
-
-    public void log(String logText) {
-    	System.out.println(logText);
     }
     
     public void logToAll(String logText) {

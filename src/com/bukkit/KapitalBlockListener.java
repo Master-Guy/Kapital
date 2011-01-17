@@ -3,7 +3,8 @@ package com.bukkit;
 import org.bukkit.event.block.BlockListener;
 
 /**
- * Kapital block listener
+ * Kapital Block Listener
+ * 
  * @author Ant59 and Master-Guy
  */
 

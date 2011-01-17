@@ -11,9 +11,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * MG for Bukkit
+ * Kapital for Bukkit
  *
- * @author Master-Guy
+ * @author Ant59 and Master-Guy
  */
 
 public class Kapital extends JavaPlugin {

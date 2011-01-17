@@ -3,8 +3,9 @@ package com.bukkit;
 import org.bukkit.event.player.PlayerListener;
 
 /**
- * Handle events for all Player related events
- * @author Master-Guy
+ * Kapital Payer Listener
+ * 
+ * @author Ant59 and Master-Guy
  */
 
 public class KapitalPlayerListener extends PlayerListener {

@@ -3,7 +3,7 @@ package com.kteam.bukkit.kapital;
 /**
  * City
  * 
- * @author Ant59
+ * @author Ant59 and Master-Guy
  */
 
 public class City {

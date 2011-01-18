@@ -44,6 +44,10 @@ public class Settings {
     	gotLine = false; // We don't have the settings found yet
     	testFileExists(fileName); // Test if the file exists
     	
+		if(splitValue == "") {
+			splitValue = "afs4wfa3waawfa3dogrsijkge5ssioeguhwar3awwa3rar";
+		}
+    	
         try {
         	// Get the line from the file
 			FileInputStream fstream = new FileInputStream(fileName);
@@ -52,9 +56,6 @@ public class Settings {
 				curLine = in.readLine().toString();
 				if(curLine.split("=", 2)[0].equalsIgnoreCase(optionName)) {
 					returnValue = new String[100];
-					if(splitValue == "") {
-						splitValue = "afs4wfa3waawfa3dogrsijkge5ssioeguhwar3awwa3rar";
-					}
 					returnValue = curLine.split("=", 2)[1].split(splitValue);
 					gotLine = true;
 				}
@@ -63,6 +64,7 @@ public class Settings {
 			
 			// If the line does not exist, create it
 			if(!gotLine) {
+                returnValue = defaultValue.split(splitValue);
                 FileOutputStream out;
                 PrintStream p;
                 try {

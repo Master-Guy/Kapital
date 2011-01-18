@@ -22,7 +22,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Kapital extends JavaPlugin {
 	// Logger
 	public static final Logger log = Logger.getLogger("Minecraft");
-	
+
+    private final MySQL MySQL = new MySQL();
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);
 //    private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
 //    private final Settings Settings = new Settings();
@@ -39,6 +40,12 @@ public class Kapital extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Event.Type.PLAYER_COMMAND, playerListener, Priority.Normal, this);
     	log.info("[" + name + "] v" + version + " - Loaded and Enabled");
+    	try {
+    		MySQL.getStatement().executeUpdate("insert into kapital__tiles (x, z, owner, welcome, farewell) values(0, 0, 'OurMineCraftServerWorld', 'Welcome to our server', 'Thank you for visiting the spawn!')");
+    	} catch (Exception e) {
+    		log.warning("Insert statement failed: "+e.toString());
+    	} finally {
+    	}
     }
     
     public void onDisable() {

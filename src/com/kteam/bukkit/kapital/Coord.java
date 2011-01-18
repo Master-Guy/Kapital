@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
  * Coordinate handler
  * Based-off Towny coord.java
  * 
- * @author Ant59
+ * @author Ant59 and Master-Guy
  */
 
 public class Coord {

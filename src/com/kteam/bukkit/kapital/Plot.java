@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerChatEvent;
  * Land Plot
  * Plots of land are designated areas by the city that citizens can buy
  * 
- * @author antony
+ * @author Ant59
  */
 public class Plot {
 	// Logger
@@ -31,6 +31,14 @@ public class Plot {
 	private Chunk plot;
 	private Block topBlock;
 	
+	
+	/* I think the these two methods should be in the Tile, rather than plot, since Tile is the chunk handing class.
+	 * Plot was meant to be a scalable area, set by mayors as purchasable land within a City.
+	 * 
+	 * Up to you if you want to change it though :)
+	 * 
+	 * -Ant59
+	 */
 	public void buyPlot(PlayerChatEvent event) {
 		event.getPlayer().sendMessage("Buying plot");
 		plots.put("plot"+plotsBought+"_owner", event.getPlayer().getName());

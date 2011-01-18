@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.PluginManager;
@@ -22,7 +24,8 @@ public class Kapital extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);
-    private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
+//    private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
+//    private final Settings Settings = new Settings();
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
     
     public static String name = "Kapital";
@@ -34,6 +37,7 @@ public class Kapital extends JavaPlugin {
 
     public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
+        pm.registerEvent(Event.Type.PLAYER_COMMAND, playerListener, Priority.Normal, this);
     	log.info("[" + name + "] v" + version + " - Loaded and Enabled");
     }
     

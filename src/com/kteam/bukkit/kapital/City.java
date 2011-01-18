@@ -7,6 +7,6 @@ package com.kteam.bukkit.kapital;
  */
 
 public class City {
-	private Nation nation; //Where does the city belong to?
+	//private Nation nation; //Where does the city belong to?
 
 }

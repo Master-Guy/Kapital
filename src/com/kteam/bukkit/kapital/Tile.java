@@ -7,11 +7,11 @@ package com.kteam.bukkit.kapital;
  */
 
 public class Tile {
-	private int x, z;
-	private City city; //Where does the tile belong to?
+	//private int x, z;
+	//private City city; //Where does the tile belong to?
 	
 	public Tile(int x, int z) {
-		this.x = x;
-		this.z = z;
+		//this.x = x;
+		//this.z = z;
 	}
 }

@@ -28,16 +28,6 @@ public class Tile {
 	private Chunk plot;
 	private Block topBlock;
 	
-	/* I think the these two methods should be in the Tile, rather than plot, since Tile is the chunk handing class.
-	 * Plot was meant to be a scalable area, set by mayors as purchasable land within a City.
-	 * 
-	 * Up to you if you want to change it though :)
-	 * 
-	 * -Ant59
-	 * 
-	 * Move it to the tile class
-	 * -MG
-	 */
 	public void buyTile(PlayerChatEvent event) {
 		event.getPlayer().sendMessage("Buying plot");
 		plots.put("plot"+plotsBought+"_owner", event.getPlayer().getName());

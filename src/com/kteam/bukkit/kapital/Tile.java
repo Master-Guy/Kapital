@@ -18,8 +18,8 @@ public class Tile {
 
     private final Kapital plugin;
     
-	public Tile(Kapital instance) {
-		this.plugin = instance;
+	public Tile(Kapital plugin) {
+		this.plugin = plugin;
 	}
 	
 	private HashMap<String, String> plots = new HashMap<String, String>();

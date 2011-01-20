@@ -12,12 +12,12 @@ import org.bukkit.event.block.BlockListener;
 
 public class KapitalBlockListener extends BlockListener {
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
-//    private final Settings Settings = new Settings();
+    private final Settings Settings = new Settings();
 	
     private final Kapital plugin;
     private int I;
 
-    public KapitalBlockListener(final Kapital plugin) {
+    public KapitalBlockListener(Kapital plugin) {
         this.plugin = plugin;
     }
     

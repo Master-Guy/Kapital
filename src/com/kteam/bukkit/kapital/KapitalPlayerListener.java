@@ -13,12 +13,12 @@ import org.bukkit.event.player.PlayerListener;
 public class KapitalPlayerListener extends PlayerListener {
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
     private final Settings Settings = new Settings();
-    //private final Kapital plugin;
+    private final Kapital plugin;
     private final Tile Tile;
 
-    public KapitalPlayerListener(Kapital instance) {
-        //plugin = instance;
-        Tile = new Tile(instance);
+    public KapitalPlayerListener(Kapital plugin) {
+        this.plugin = plugin;
+        Tile = new Tile(plugin);
     }
 
 

@@ -43,7 +43,7 @@ public class Coord {
 		return result;
 	}
 	
-	public boolean equals(Object obj) {
+	/*public boolean equals(Object obj) {
 		if (obj == this)
 			return true;
 		if (!(obj instanceof Coord))
@@ -52,7 +52,7 @@ public class Coord {
 		Coord o = (Coord)obj;
 		return this.x == o.x
 			&& this.z == o.z;
-	}
+	}*/
 	
 	public static Coord parseCoord(int x, int z) {
 		return new Coord(

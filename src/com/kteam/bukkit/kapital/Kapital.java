@@ -20,27 +20,40 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 
 public class Kapital extends JavaPlugin {
-	// Logger
-	public static final Logger log = Logger.getLogger("Minecraft");
+	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
+    
+    private static String name = "Kapital";
+    private static String version = "0.0.1";
 
     private final MySQL MySQL = new MySQL();
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);
-//    private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
-//    private final Settings Settings = new Settings();
-    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
+    private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
+    private final Settings Settings = new Settings();
     
-    public static String name = "Kapital";
-    public static String version = "0.0.1";
+    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 
     public Kapital(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader) {
         super(pluginLoader, instance, desc, folder, plugin, cLoader);
     }
 
     public void onEnable() {
+    	regEvents();
+    	checkDB();
+
+    	log.info("[" + name + "] v" + version + " - Loaded and Enabled");
+    }
+    
+    public void onDisable() {
+    	log.info("[" + name + "] v" + version + " - Disabled");
+    }
+    
+    private void regEvents() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Event.Type.PLAYER_COMMAND, playerListener, Priority.Normal, this);
-    	log.info("[" + name + "] v" + version + " - Loaded and Enabled");
-		MySQL.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__cities` (`id` int(11) NOT NULL auto_increment,`mayor` varchar(30) NOT NULL,`welcome` varchar(100) default NULL,`farewell` varchar(100) default NULL,`free_build` tinyint(1) NOT NULL default '0',`nation` int(11) default NULL,PRIMARY KEY  (`id`))");
+    }
+    
+    private void checkDB() {
+    	MySQL.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__cities` (`id` int(11) NOT NULL auto_increment,`mayor` varchar(30) NOT NULL,`welcome` varchar(100) default NULL,`farewell` varchar(100) default NULL,`free_build` tinyint(1) NOT NULL default '0',`nation` int(11) default NULL,PRIMARY KEY  (`id`))");
 		MySQL.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nations` (`id` int(11) NOT NULL auto_increment,`name` varchar(100) NOT NULL,`gov_type` tinyint(2) NOT NULL,`leader_id` int(11) NOT NULL,PRIMARY KEY  (`id`))");
 		MySQL.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nation_cities` (`nation_id` int(11) NOT NULL,`city_id` int(11) NOT NULL)");
 		MySQL.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nation_relations` (`nation1_id` int(11) NOT NULL,`nation2_id` int(11) NOT NULL,`relation` tinyint(2) NOT NULL)");
@@ -51,10 +64,12 @@ public class Kapital extends JavaPlugin {
 		MySQL.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__tiles` (`id` int(11) NOT NULL,`x` int(11) NOT NULL,`z` int(11) NOT NULL,`city_id` int(11) NOT NULL,PRIMARY KEY  (`id`))");
     }
     
-    public void onDisable() {
-    	log.info("[" + name + "] v" + version + " - Disabled");
+    public String getVersion() {
+    	return version;
     }
     
+    
+    // DEBUGGING
     public boolean isDebugging(final Player player) {
         if (debugees.containsKey(player)) {
             return debugees.get(player);

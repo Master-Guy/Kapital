@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.Server;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
@@ -28,7 +29,8 @@ public class Kapital extends JavaPlugin {
     private final MySQL MySQL = new MySQL();
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);
     private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
-    private final Settings Settings = new Settings();
+    
+    private World world;
     
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 
@@ -67,6 +69,14 @@ public class Kapital extends JavaPlugin {
     public String getVersion() {
     	return version;
     }
+    
+    public World getWorld() {
+		return world;
+	}
+    
+    public void msg(Player player, String msg) {
+			player.sendMessage(ChatColor.GOLD + "[Kapital] " + ChatColor.WHITE + msg);
+	}
     
     
     // DEBUGGING

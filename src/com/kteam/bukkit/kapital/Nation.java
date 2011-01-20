@@ -6,6 +6,12 @@ package com.kteam.bukkit.kapital;
  * @author Ant59 and Master-Guy
  */
 
-public class Nation {
-
+public class Nation extends Object {
+    private final Kapital plugin;
+    
+	public Nation(Kapital plugin) {
+		this.plugin = plugin;
+		
+		
+	}
 }

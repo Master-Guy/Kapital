@@ -2,10 +2,10 @@ package com.kteam.bukkit.kapital;
 
 import org.bukkit.entity.Player;
 
-public class World extends Object {
+public class KapitalWorld extends KapitalObject {
     private final Kapital plugin;
     
-	public World(Kapital plugin) {
+	public KapitalWorld(Kapital plugin) {
 		this.plugin = plugin;
 	}
     
@@ -46,9 +46,28 @@ public class World extends Object {
 	
 	public void msgAll(String[] lines) {
 		for (Player player : getOnlinePlayers())
-			for (String line : lines)
+			for (String line : lines) {
+				plugin.msg(player, line);
+				plugin.consoleLog(line);
+			}
+	}
+    
+    public void msgPlayer(Player player, String line) {
+			plugin.msg(player, line);
+	}
+	
+	public void msgCity(City city, String line) {
+		for (Player player : getOnlinePlayers(city))
 				plugin.msg(player, line);
 	}
 	
+	public void msgNation(Nation nation, String line) {
+		for (Player player : getOnlinePlayers(nation))
+				plugin.msg(player, line);
+	}
 	
+	public void msgAll(String line) {
+		for (Player player : getOnlinePlayers())
+				plugin.msg(player, line);
+	}
 }

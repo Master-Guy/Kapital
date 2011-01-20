@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.logging.Logger;
 
-public class Settings {
+public class KapitalSettings {
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
 	private String curLine; // A line in the file 
 	

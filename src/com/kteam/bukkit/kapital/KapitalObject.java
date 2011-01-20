@@ -6,7 +6,7 @@ package com.kteam.bukkit.kapital;
  * @author Ant59
  */
 
-public abstract class Object {
+public abstract class KapitalObject {
 	private String name;
 
 	public void setName(String name) {

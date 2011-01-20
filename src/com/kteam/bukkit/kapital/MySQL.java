@@ -17,15 +17,18 @@ public class MySQL {
 	
 
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
-    private Settings Settings = new Settings();
+    private final Kapital plugin;
+    private KapitalSettings Settings = new KapitalSettings();
+    
 	private Connection MySQLConnection;
 	private Statement MySQLStatement;
 	@SuppressWarnings("unused")
 	private Driver MySQLDriver;
 	private String MySQLUser, MySQLPass, MySQLHost, MySQLPort, MySQLDataBase, MySQLURL;
 	
-	public MySQL() {
-		log.info("MySQL for Kapital loading");
+	public MySQL(Kapital plugin) {
+		this.plugin = plugin;
+		plugin.consoleLog("Loading MySQL");
 		try {
 			MySQLUser = Settings.getSetting("settings/kapital.ini", "mysql_user", "root")[0];
 			MySQLPass = Settings.getSetting("settings/kapital.ini", "mysql_pass", "passwd")[0];
@@ -37,7 +40,7 @@ public class MySQL {
 			MySQLConnection = DriverManager.getConnection(MySQLURL, MySQLUser, MySQLPass);
 			MySQLStatement = MySQLConnection.createStatement();
 		} catch (Exception e) {
-    		log.warning("MySQL connection failed: "+e.toString());
+			plugin.consoleWarning("MySQL connection failed: "+e.toString());
 		} finally {
 		}
 	}
@@ -54,8 +57,8 @@ public class MySQL {
 		try {
 			getStatement().executeUpdate(sqlString);
     	} catch (Exception e) {
-    		log.warning("The following statement failed: "+sqlString);
-    		log.warning("Statement failed: "+e.toString());
+    		plugin.consoleWarning("The following statement failed: "+sqlString);
+    		plugin.consoleWarning("Statement failed: "+e.toString());
     	} finally {}	
 	}
 }

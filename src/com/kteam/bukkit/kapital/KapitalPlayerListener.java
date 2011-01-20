@@ -57,8 +57,8 @@ public class KapitalPlayerListener extends PlayerListener {
 			return;
 		}
 
-		try
-		{
+		//try
+		//{
 			switch (cmd)
 			{
 			case MSGALL:
@@ -68,7 +68,7 @@ public class KapitalPlayerListener extends PlayerListener {
 			default:
 				return;
 			}
-		}
+		/*}
 		catch (NoSuchMethodError ex)
 		{
 			// Running an old version of CraftBukkit that does not support any methods used.
@@ -78,7 +78,7 @@ public class KapitalPlayerListener extends PlayerListener {
 		{
 			// Unexpected error encountered.  Tell the user.  Can be thrown on purpose to notify the user of syntax errors and such.
 			plugin.msg(player, ChatColor.RED + "Error: " + ex.getMessage());
-		}
+		}*/
 		
 		plugin.consoleLog(String.format("%1$s issued command: %2$s", player.getName(), event.getMessage()));
 		event.setCancelled(true); // Prevent other plugins from processing the command.

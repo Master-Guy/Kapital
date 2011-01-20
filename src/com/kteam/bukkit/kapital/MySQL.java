@@ -14,11 +14,13 @@ public class MySQL {
 	 * Password: GVWshLL48b4FxJEf
 	 * Database: Kapital
 	 */
+	
 
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
     private Settings Settings = new Settings();
 	private Connection MySQLConnection;
 	private Statement MySQLStatement;
+	@SuppressWarnings("unused")
 	private Driver MySQLDriver;
 	private String MySQLUser, MySQLPass, MySQLHost, MySQLPort, MySQLDataBase, MySQLURL;
 	
@@ -32,17 +34,11 @@ public class MySQL {
 			MySQLDataBase = Settings.getSetting("settings/kapital.ini", "mysql_db", "minecraft")[0];
 			MySQLURL = "jdbc:mysql://"+MySQLHost+":"+MySQLPort+"/"+MySQLDataBase;
 			Class.forName("com.mysql.jdbc.Driver");
-			log.info("t1");
 			MySQLConnection = DriverManager.getConnection(MySQLURL, MySQLUser, MySQLPass);
-			log.info("t2");
 			MySQLStatement = MySQLConnection.createStatement();
-			log.info("t3");
-			MySQLStatement.executeUpdate("CREATE TABLE IF NOT EXISTS `kapital__tiles` ( `id` int(11) NOT NULL auto_increment, `x` int(11) NOT NULL, `z` int(11) NOT NULL, `owner` varchar(30) NOT NULL, `welcome` varchar(250) default NULL, `farewell` varchar(250) default NULL, PRIMARY KEY  (`id`))");
-			log.info("t4");
 		} catch (Exception e) {
-    		log.warning("Create statement failed: "+e.toString());
+    		log.warning("MySQL connection failed: "+e.toString());
 		} finally {
-			log.info("MySQL for Kapital loaded");
 		}
 	}
 	
@@ -52,5 +48,14 @@ public class MySQL {
 	
 	public Statement getStatement() {
 		return MySQLStatement;
+	}
+	
+	public void tryUpdate(String sqlString) {
+		try {
+			getStatement().executeUpdate(sqlString);
+    	} catch (Exception e) {
+    		log.warning("The following statement failed: "+sqlString);
+    		log.warning("Statement failed: "+e.toString());
+    	} finally {}	
 	}
 }

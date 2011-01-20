@@ -30,7 +30,7 @@ public class Kapital extends JavaPlugin {
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);
     private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
     
-    public KapitalWorld world;
+    private KapitalWorld kapitalWorld;
     
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 
@@ -72,8 +72,8 @@ public class Kapital extends JavaPlugin {
     	return version;
     }
     
-    public KapitalWorld getWorld() {
-		return world;
+    public KapitalWorld getKapitalWorld() {
+		return kapitalWorld;
 	}
     
     public void msg(Player player, String msg) {

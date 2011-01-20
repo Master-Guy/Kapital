@@ -29,45 +29,43 @@ public class KapitalWorld extends KapitalObject {
     
     public void msgPlayer(Player player, String[] lines) {
 		for (String line : lines)
-			plugin.msg(player, line);
+	    	player.sendMessage(line);
 	}
 	
 	public void msgCity(City city, String[] lines) {
 		for (Player player : getOnlinePlayers(city))
 			for (String line : lines)
-				plugin.msg(player, line);
+		    	player.sendMessage(line);
 	}
 	
 	public void msgNation(Nation nation, String[] lines) {
 		for (Player player : getOnlinePlayers(nation))
 			for (String line : lines)
-				plugin.msg(player, line);
+		    	player.sendMessage(line);
 	}
 	
 	public void msgAll(String[] lines) {
 		for (Player player : getOnlinePlayers())
-			for (String line : lines) {
-				plugin.msg(player, line);
-				plugin.consoleLog(line);
-			}
+			for (String line : lines)
+		    	player.sendMessage(line);
 	}
     
     public void msgPlayer(Player player, String line) {
-			plugin.msg(player, line);
+    	player.sendMessage(line);
 	}
 	
 	public void msgCity(City city, String line) {
 		for (Player player : getOnlinePlayers(city))
-				plugin.msg(player, line);
+			player.sendMessage(line);
 	}
 	
 	public void msgNation(Nation nation, String line) {
 		for (Player player : getOnlinePlayers(nation))
-				plugin.msg(player, line);
+	    	player.sendMessage(line);
 	}
 	
 	public void msgAll(String line) {
 		for (Player player : getOnlinePlayers())
-				plugin.msg(player, line);
+	    	player.sendMessage(line);
 	}
 }

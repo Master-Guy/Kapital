@@ -2,6 +2,7 @@ package com.kteam.bukkit.kapital;
 
 import java.util.logging.Logger;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerListener;
@@ -61,7 +62,7 @@ public class KapitalPlayerListener extends PlayerListener {
 			switch (cmd)
 			{
 			case MSGALL:
-				plugin.getWorld().msgAll(Misc.arrayToString(args, " "));
+				plugin.getKapitalWorld().msgAll(Misc.arrayToString(args, " "));
 				break;
 
 			default:
@@ -76,7 +77,7 @@ public class KapitalPlayerListener extends PlayerListener {
 		catch (Exception ex)
 		{
 			// Unexpected error encountered.  Tell the user.  Can be thrown on purpose to notify the user of syntax errors and such.
-			plugin.msg(player, "§cError: " + ex.getMessage());
+			plugin.msg(player, ChatColor.RED + "Error: " + ex.getMessage());
 		}
 		
 		plugin.consoleLog(String.format("%1$s issued command: %2$s", player.getName(), event.getMessage()));

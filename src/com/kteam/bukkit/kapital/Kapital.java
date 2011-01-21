@@ -30,7 +30,7 @@ public class Kapital extends JavaPlugin {
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);
     private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
     
-    private KapitalWorld kapitalWorld;
+    private KapitalWorld kapitalWorld = new KapitalWorld(this);
     
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 

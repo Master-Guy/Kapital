@@ -1,9 +1,14 @@
 package com.kteam.bukkit.kapital;
 
+import java.util.HashMap;
+
 import org.bukkit.entity.Player;
 
 public class KapitalWorld extends KapitalObject {
     private final Kapital plugin;
+	private HashMap<String, Inhabitant> inhabitants = new HashMap<String, Inhabitant>();
+	private HashMap<String, City> cities = new HashMap<String, City>();
+	private HashMap<String, Nation> nations = new HashMap<String, Nation>();
     
 	public KapitalWorld(Kapital plugin) {
 		this.plugin = plugin;

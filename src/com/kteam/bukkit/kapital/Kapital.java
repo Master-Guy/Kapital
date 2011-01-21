@@ -23,19 +23,36 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Kapital extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
     
-    private static String name = "Kapital";
-    private static String version = "0.0.1";
+    private String name;
+    private String version;
+    private PluginDescriptionFile desc;
 
     private final MySQL MySQL = new MySQL(this);
     private final KapitalPlayerListener playerListener = new KapitalPlayerListener(this);
     private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
+
+    public FlatProperties settings;
+    public FlatProperties commands;
     
     private KapitalWorld kapitalWorld = new KapitalWorld(this);
     
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
+    
+    public Boolean firstRun = false;
 
     public Kapital(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader) {
         super(pluginLoader, instance, desc, folder, plugin, cLoader);
+
+        this.desc = desc;
+        name = this.desc.getName();
+        version = this.desc.getVersion();
+
+        if (!folder.exists())
+        	firstRun = true;
+        folder.mkdirs();
+
+        this.settings = new FlatProperties(folder.getPath() + "/settings.properties");
+        this.commands = new FlatProperties(folder.getPath() + "/commands.properties");
     }
 
     public void onEnable() {

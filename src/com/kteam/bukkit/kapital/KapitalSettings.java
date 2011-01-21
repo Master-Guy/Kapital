@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class KapitalSettings {
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
-	private String curLine; // A line in the file 
+	private String curLine; // A line in the file
 	
     public void testFolderExists(String folder) {
     	boolean success = (new File(folder)).mkdirs();

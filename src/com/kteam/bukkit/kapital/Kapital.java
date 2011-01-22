@@ -114,20 +114,21 @@ public class Kapital extends JavaPlugin {
     public boolean onCommand(Player player, Command command, String commandLabel, String[] args) {
         String[] split = args;
         String commandName = command.getName().toLowerCase();
+        msg(player, "'"+split[0]+"'");
 
-        if (commandName.equals("nation")) {
+        if (commandName.equalsIgnoreCase("nation")) {
             if (split.length == 0) {
             	msg(player, "Info on nations"); // TODO
                 return true;
-            } else if (split[0] == "list") {
+            } else if (split[0].equalsIgnoreCase("list")) {
         		msg(player, "List of nations"); // TODO
         		return true;
             }
-        } else if (commandName.equals("city")) {
+        } else if (commandName.equalsIgnoreCase("city")) {
         	if (split.length == 0) {
             	msg(player, "Info on cities"); // TODO
                 return true;
-            } else if (split[0] == "list") {
+            } else if (split[0].equalsIgnoreCase("list")) {
             	if (split.length == 1) {
             		msg(player, "List of cities"); // TODO
             		return true;

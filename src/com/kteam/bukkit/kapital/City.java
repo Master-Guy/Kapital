@@ -17,6 +17,8 @@ public class City {
 
     public Player mayor;
     public Integer mayorId;
+	
+    private final MySQL MySQL = new MySQL(this.plugin);
     
 	public City(Kapital plugin, Player founder, String name, String mayorName) {
 		this.plugin = plugin;
@@ -24,8 +26,7 @@ public class City {
 	    cityLevels.put("inhabitant", 1);
 	    cityLevels.put("council", 2);
 	    cityLevels.put("mayor", 3);
-	}
-    private final MySQL MySQL = new MySQL(this.plugin);
+	};
     
     public int checkPlayer(String playerName) {
     	MySQL.tryUpdate("insert ignore into kapital__players (name) values ('"+playerName+"')");

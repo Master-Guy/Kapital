@@ -119,9 +119,11 @@ public class Kapital extends JavaPlugin {
             if (split.length == 0) {
             	msg(player, "Info on nations"); // TODO
                 return true;
-            } else if (split[0] == "list") {
-        		msg(player, "List of nations"); // TODO
-        		return true;
+            } else if (split.length == 1) {
+            	if (split[0] == "list") {
+            		msg(player, "List of nations"); // TODO
+            		return true;
+                }
             }
         } else if (commandName.equals("city")) {
         	if (split.length == 0) {

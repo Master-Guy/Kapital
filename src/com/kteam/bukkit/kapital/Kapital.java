@@ -13,6 +13,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.command.Command;
 
 /**
  * Kapital for Bukkit
@@ -32,7 +33,7 @@ public class Kapital extends JavaPlugin {
     private final KapitalBlockListener blockListener = new KapitalBlockListener(this);
 
     public FlatProperties settings;
-    public FlatProperties commands;
+    //public FlatProperties commands;
     
     private KapitalWorld kapitalWorld = new KapitalWorld(this);
     
@@ -52,7 +53,7 @@ public class Kapital extends JavaPlugin {
         folder.mkdirs();
 
         this.settings = new FlatProperties(folder.getPath() + "/settings.properties");
-        this.commands = new FlatProperties(folder.getPath() + "/commands.properties");
+        //this.commands = new FlatProperties(folder.getPath() + "/commands.properties");
     }
 
     public void onEnable() {
@@ -94,7 +95,7 @@ public class Kapital extends JavaPlugin {
 	}
     
     public void msg(Player player, String msg) {
-			player.sendMessage(ChatColor.GOLD + "[Kapital] " + ChatColor.WHITE + msg);
+		player.sendMessage(ChatColor.GOLD + "[Kapital] " + ChatColor.WHITE + msg);
 	}
     
     public void consoleLog(String msg) {
@@ -107,6 +108,36 @@ public class Kapital extends JavaPlugin {
     
     public void consoleError(String msg) {
     	log.severe("[" + name + "] v" + version + " - " + msg);
+    }
+    
+    @Override
+    public boolean onCommand(Player player, Command command, String commandLabel, String[] args) {
+        String[] split = args;
+        String commandName = command.getName().toLowerCase();
+
+        if (commandName.equals("nation")) {
+            if (split.length == 0) {
+            	msg(player, "Info on nations"); // TODO
+                return true;
+            } else if (split[0] == "list") {
+        		msg(player, "List of nations"); // TODO
+        		return true;
+            }
+        } else if (commandName.equals("city")) {
+        	if (split.length == 0) {
+            	msg(player, "Info on cities"); // TODO
+                return true;
+            } else if (split[0] == "list") {
+            	if (split.length == 1) {
+            		msg(player, "List of cities"); // TODO
+            		return true;
+            	} else if (split.length == 2) {
+            		msg(player, "List of cities in nation " + split[1]); // TODO
+            		return true;
+            	}
+            }
+        }
+        return false;
     }
     
     

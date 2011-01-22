@@ -1,3 +1,13 @@
 name: Kapital
 main: com.kteam.bukkit.kapital.Kapital
 version: 0.0.1
+commands:
+  nation:
+    description: Nation commands
+    usage: |        
+        Incorrect usage of command /<command>. Examples:
+           /<command> - Information on current nation
+           /<command> list - List all nations
+  city:
+    description: City commands
+    usage: /<command>

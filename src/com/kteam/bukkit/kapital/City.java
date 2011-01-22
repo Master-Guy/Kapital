@@ -33,7 +33,7 @@ public class City {
     	return -1;
     }
 	
-	public boolean buyCity(Player ply, String newMayorName) {
+	public boolean startCity(Player ply, String newCityName, String newMayorName) {
 		boolean newMayorIsOnline;
 		Player newMayor;
 		ResultSet rs;
@@ -60,9 +60,11 @@ public class City {
 						newMayor.sendMessage(ply.getName()+" tried to start a city for you, but the location you are standing is taken already!");
 						return false;
 					} else {
-						MySQL.tryUpdate("insert into kapital__cities (mayor) values('"+newMayor.getName()+"')");
+						MySQL.tryUpdate("insert into kapital__cities (name, mayor) values('"+newCityName+"', '"+newMayor.getName()+"')");
 						rs = MySQL.trySelect("select id from kapital__cities c where mayor = '"+newMayor.getName()+"'");
 						MySQL.tryUpdate("insert into kapital__player_cities (city_id, player_id, player_level) values("+rs.getInt("id")+", "+checkPlayer(newMayor.getName())+", "+cityLevels.get("mayor")+")");
+						newMayor.sendMessage("The city "+newCityName+" has been created at your current location. Type '/city help' for more information.");
+						ply.sendMessage("The city "+newCityName+" has been created with "+newMayor.getName()+" as mayor");
 					}
 				}
 			} catch (Exception e) {

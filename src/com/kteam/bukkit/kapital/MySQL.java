@@ -61,4 +61,14 @@ public class MySQL {
     		plugin.consoleWarning("Statement failed: "+e.toString());
     	} finally {}	
 	}
+	
+	public ResultSet trySelect(String sqlString) {
+		try {
+			return getStatement().executeQuery(sqlString);
+    	} catch (Exception e) {
+    		plugin.consoleWarning("The following statement failed: "+sqlString);
+    		plugin.consoleWarning("Statement failed: "+e.toString());
+    	} finally {}
+    	return null;
+	}
 }

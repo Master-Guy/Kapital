@@ -39,6 +39,7 @@ public class MySQL {
 			Class.forName("com.mysql.jdbc.Driver");
 			MySQLConnection = DriverManager.getConnection(MySQLURL, MySQLUser, MySQLPass);
 			MySQLStatement = MySQLConnection.createStatement();
+			MySQLConnection.setAutoCommit(true);
 		} catch (Exception e) {
 			plugin.consoleWarning("MySQL connection failed: "+e.toString());
 		} finally {
@@ -60,5 +61,15 @@ public class MySQL {
     		plugin.consoleWarning("The following statement failed: "+sqlString);
     		plugin.consoleWarning("Statement failed: "+e.toString());
     	} finally {}	
+	}
+	
+	public ResultSet trySelect(String sqlString) {
+		try {
+			return getStatement().executeQuery(sqlString);
+    	} catch (Exception e) {
+    		plugin.consoleWarning("The following statement failed: "+sqlString);
+    		plugin.consoleWarning("Statement failed: "+e.toString());
+    	} finally {}
+    	return null;
 	}
 }

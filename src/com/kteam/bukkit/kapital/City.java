@@ -18,8 +18,9 @@ public class City {
     public Player mayor;
     public Integer mayorId;
     
-	public City(Kapital plugin) {
+	public City(Kapital plugin, Player founder, String name, String mayorName) {
 		this.plugin = plugin;
+		startCity(founder, name, mayorName);
 	    cityLevels.put("inhabitant", 1);
 	    cityLevels.put("council", 2);
 	    cityLevels.put("mayor", 3);

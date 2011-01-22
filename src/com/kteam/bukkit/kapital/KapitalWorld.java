@@ -13,8 +13,6 @@ public class KapitalWorld extends KapitalObject {
 	public KapitalWorld(Kapital plugin) {
 		this.plugin = plugin;
 	}
-
-    public City city;
     
     public Player[] getOnlinePlayers() {
 		return plugin.getServer().getOnlinePlayers();
@@ -76,9 +74,7 @@ public class KapitalWorld extends KapitalObject {
 	    	player.sendMessage(line);
 	}
 	
-	public void startCity(Player ply, String newCityName, String newMayorName) {
-		city = new City(this.plugin);
-		cities.put(newCityName, city.startCity(ply, newCityName, newMayorName));
-		//cities.put(newCityName, new city.startCity(ply, newCityName, newMayorName));
+	public void startCity(Player founder, String name, String mayorName) {
+		cities.put(name, new City(plugin, founder, name, mayorName));
 	}
 }

@@ -1,11 +1,12 @@
 package com.kteam.bukkit.kapital;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.logging.Logger;
 
-import java.sql.*;
 import com.mysql.jdbc.Driver;
-//import com.mysql.jdbc.Connection;
-//import com.mysql.jdbc.Statement;
 
 public class MySQL {
 	/*
@@ -65,6 +66,7 @@ public class MySQL {
 	
 	public ResultSet trySelect(String sqlString) {
 		try {
+			System.out.println(getStatement().toString());
 			return getStatement().executeQuery(sqlString);
     	} catch (Exception e) {
     		plugin.consoleWarning("The following statement failed: "+sqlString);

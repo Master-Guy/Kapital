@@ -14,24 +14,28 @@ import org.bukkit.entity.Player;
 public class City {
     private final Kapital plugin;
     private HashMap<String, Integer> cityLevels = new HashMap<String, Integer>();
+    private MySQL mysql;
 
     public Player mayor;
     public Integer mayorId;
-	
-    private final MySQL MySQL = new MySQL(this.plugin);
     
-	public City(Kapital plugin, Player founder, String name, String mayorName) {
+	public City(Kapital plugin, Player founder, String cityName, String mayorName) {
 		this.plugin = plugin;
-		startCity(founder, name, mayorName);
+		mysql = new MySQL(plugin);
 	    cityLevels.put("inhabitant", 1);
 	    cityLevels.put("council", 2);
 	    cityLevels.put("mayor", 3);
+		startCity(founder, cityName, mayorName);
 	};
+	
     
     public int checkPlayer(String playerName) {
-    	MySQL.tryUpdate("insert ignore into kapital__players (name) values ('"+playerName+"')");
+    	ResultSet rs;
+    	mysql.tryUpdate("insert ignore into kapital__players (name) values ('"+playerName+"')");
     	try {
-    		return MySQL.trySelect("select id from kapital__players where name = '"+playerName+"'").getInt("id");
+    		rs = mysql.trySelect("select id from kapital__players where name = '"+playerName+"'");
+    		rs.next();
+    		return rs.getInt("id");
     	} catch (Exception e) {
     		plugin.consoleWarning("checkPlayer failed: "+e.toString());
     	}
@@ -64,23 +68,27 @@ public class City {
 			}
 		}
 		if (newMayorIsOnline) {
-			rs = MySQL.trySelect("select count(*) cnt from kapital__cities c where mayor = '"+newMayor.getName()+"'");
 			try {
+				rs = mysql.trySelect("select count(*) cnt from kapital__cities c where mayor = '"+newMayor.getName()+"'");
+				rs.next();
 				if (rs.getInt("cnt") > 0) {
 					ply.sendMessage(newMayor.getName()+" is already mayor of a city!");
 					newMayor.sendMessage(ply.getName()+" tried to start a city for you, but you are mayor already of a city!");
 					return null;
 				} else {
 					Chunk tile = this.plugin.getServer().getWorlds()[0].getChunkAt(newMayor.getLocation().getBlockX(), newMayor.getLocation().getBlockZ());
-					rs = MySQL.trySelect("select count(*) cnt from kapital__tiles t where x = "+tile.getX()+" and z = "+tile.getZ());
+					rs = mysql.trySelect("select count(*) cnt from kapital__tiles t where x = "+tile.getX()+" and z = "+tile.getZ());
+					rs.next();
 					if(rs.getInt("cnt") > 0) {
 						ply.sendMessage("The location at which "+newMayor.getName()+" is standing, is already taken!");
 						newMayor.sendMessage(ply.getName()+" tried to start a city for you, but the location you are standing is taken already!");
 						return null;
 					} else {
-						MySQL.tryUpdate("insert into kapital__cities (name, mayor) values('"+newCityName+"', '"+newMayor.getName()+"')");
-						rs = MySQL.trySelect("select id from kapital__cities c where mayor = '"+newMayor.getName()+"'");
-						MySQL.tryUpdate("insert into kapital__player_cities (city_id, player_id, player_level) values("+rs.getInt("id")+", "+checkPlayer(newMayor.getName())+", "+cityLevels.get("mayor")+")");
+						mysql.tryUpdate("insert into kapital__cities (name, mayor) values('"+newCityName+"', '"+newMayor.getName()+"')");
+						rs = mysql.trySelect("select id from kapital__cities c where mayor = '"+newMayor.getName()+"'");
+						rs.next();
+						mysql.tryUpdate("insert into kapital__player_cities (city_id, player_id, player_level) values("+rs.getInt("id")+", "+checkPlayer(newMayor.getName())+", "+cityLevels.get("mayor")+")");
+						mysql.tryUpdate("insert into kapital__tiles (x, z, city_id) values("+tile.getX()+", "+tile.getZ()+", "+rs.getInt("id")+")");
 						newMayor.sendMessage("The city "+newCityName+" has been created at your current location. Type '/city help' for more information.");
 						ply.sendMessage("The city "+newCityName+" has been created with "+newMayor.getName()+" as mayor");
 						this.setMayor(newMayor);

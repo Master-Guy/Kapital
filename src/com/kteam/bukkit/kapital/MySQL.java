@@ -39,6 +39,7 @@ public class MySQL {
 			Class.forName("com.mysql.jdbc.Driver");
 			MySQLConnection = DriverManager.getConnection(MySQLURL, MySQLUser, MySQLPass);
 			MySQLStatement = MySQLConnection.createStatement();
+			MySQLConnection.setAutoCommit(true);
 		} catch (Exception e) {
 			plugin.consoleWarning("MySQL connection failed: "+e.toString());
 		} finally {

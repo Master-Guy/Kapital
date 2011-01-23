@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 public class City {
     private final Kapital plugin;
+    private final KapitalWorld kapitalWorld;
     private HashMap<String, Integer> cityLevels = new HashMap<String, Integer>();
     private MySQL mysql;
 
@@ -21,6 +22,7 @@ public class City {
     
 	public City(Kapital plugin, Player founder, String cityName, String mayorName) {
 		this.plugin = plugin;
+		this.kapitalWorld = plugin.getKapitalWorld();
 		mysql = new MySQL(plugin);
 	    cityLevels.put("inhabitant", 1);
 	    cityLevels.put("council", 2);
@@ -61,10 +63,10 @@ public class City {
 		ResultSet rs;
 		newMayor = null;
 		newMayorIsOnline = false;
-		for (int i = 0; i < this.plugin.getServer().getOnlinePlayers().length; i++) {
-			if(this.plugin.getServer().getOnlinePlayers()[i].getName().toString().equalsIgnoreCase(newMayorName)) {
+		for (int i = 0; i < kapitalWorld.getOnlinePlayers().length; i++) {
+			if(kapitalWorld.getOnlinePlayers()[i].getName().toString().equalsIgnoreCase(newMayorName)) {
 				newMayorIsOnline = true;
-				newMayor = this.plugin.getServer().getOnlinePlayers()[i];
+				newMayor = kapitalWorld.getOnlinePlayers()[i];
 			}
 		}
 		if (newMayorIsOnline) {
@@ -96,9 +98,10 @@ public class City {
 					}
 				}
 			} catch (Exception e) {
-	    		plugin.consoleWarning("buyCity failed: "+e.toString());
+	    		plugin.consoleWarning("startCity failed: "+e.toString());
 			}
-		}
+		} else
+			ply.sendMessage(newMayor.getName()+" is not online!");
 		return city;
 	}
 }

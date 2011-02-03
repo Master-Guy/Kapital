@@ -1,5 +1,79 @@
 package com.kteam.bukkit.kapital;
 
+import java.util.concurrent.ConcurrentHashMap;
+
+public class KapitalSettings {
+	
+	private static final ConcurrentHashMap<KapitalSettings.Str,String> propStrings = new ConcurrentHashMap<KapitalSettings.Str,String>();
+	private static final ConcurrentHashMap<KapitalSettings.Int,Integer> propInts = new ConcurrentHashMap<KapitalSettings.Int,Integer>();
+	private static final ConcurrentHashMap<KapitalSettings.Bool,Boolean> propBools = new ConcurrentHashMap<KapitalSettings.Bool,Boolean>();
+	
+	// String
+	enum Str {
+		MYSQL_HOST,
+		MYSQL_PORT,
+		MYSQL_USER,
+		MYSQL_PASS,
+		MYSQL_DB
+	};
+	
+	// Integer
+	enum Int {
+	};
+	
+	// Boolean
+	enum Bool {
+	};
+	
+	// LOAD DEFAULTS
+	static {
+		// String
+		propStrings.put(KapitalSettings.Str.MYSQL_HOST, "localhost");
+		propStrings.put(KapitalSettings.Str.MYSQL_PORT, "3306");
+		propStrings.put(KapitalSettings.Str.MYSQL_USER, "user");
+		propStrings.put(KapitalSettings.Str.MYSQL_PASS, "pass");
+		propStrings.put(KapitalSettings.Str.MYSQL_DB, "minecraft");
+	}
+
+	public static boolean loadConfig() {
+		try {
+			String propertiesFile = Kapital.k_Folder + "config.properties";
+			KapitalProperties properties = new KapitalProperties(propertiesFile);
+			properties.load();
+			
+			for (KapitalSettings.Str key : KapitalSettings.Str.values())
+				propStrings.put(key, properties.getString(key.toString().toLowerCase(), getString(key)));
+			for (KapitalSettings.Int key : KapitalSettings.Int.values())
+				propInts.put(key, properties.getInt(key.toString().toLowerCase(), getInt(key)));
+			for (KapitalSettings.Bool key : KapitalSettings.Bool.values())
+				propBools.put(key, properties.getBoolean(key.toString().toLowerCase(), getBoolean(key)));
+			
+			properties.save("Kapital Main Configuration File");
+		} catch (Exception e) {
+			System.out.println("Failed to load configuration");
+			return false;			
+		}
+		return true;
+	}
+
+	// Basic retrieval functions
+	public static String getString(KapitalSettings.Str key) {
+		return propStrings.get(key);
+	}
+
+	public static Integer getInt(KapitalSettings.Int key) {
+		return propInts.get(key);
+	}
+
+	public static Boolean getBoolean(KapitalSettings.Bool key) {
+		return propBools.get(key);
+	}
+	
+	// Dedicated settings retrieval functions
+
+}
+
+/*
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -88,3 +162,4 @@ public class KapitalSettings {
 		return returnValue;
     }
 }
+*/

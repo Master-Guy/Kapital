@@ -37,7 +37,7 @@ public class KapitalSettings {
 
 	public static boolean loadConfig() {
 		try {
-			String propertiesFile = Kapital.k_Folder + "config.properties";
+			String propertiesFile = Kapital.k_Folder + "/config.properties";
 			KapitalProperties properties = new KapitalProperties(propertiesFile);
 			properties.load();
 			

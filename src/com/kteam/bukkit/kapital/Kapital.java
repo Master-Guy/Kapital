@@ -36,6 +36,8 @@ public class Kapital extends JavaPlugin {
     private KapitalWorld kapitalWorld = new KapitalWorld(this);
     
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
+    
+    private MySQL sql;
 	
 	//public KapitalProperties kapitalProperties = new KapitalProperties();
 

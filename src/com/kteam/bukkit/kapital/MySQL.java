@@ -8,7 +8,7 @@ import java.sql.Statement;
 import com.mysql.jdbc.Driver;
 
 public class MySQL {
-	private final Kapital plugin;
+	private final Kapital k_Plugin;
 
 	private Connection MySQLConnection;
 	private Statement MySQLStatement;
@@ -17,8 +17,8 @@ public class MySQL {
 	private String MySQLUser, MySQLPass, MySQLHost, MySQLPort, MySQLDataBase, MySQLURL;
 
 	public MySQL(Kapital instance) {
-		plugin = instance;
-		plugin.consoleLog("Running database connection...");
+		k_Plugin = instance;
+		k_Plugin.consoleLog("Running database connection...");
 		try {
 			MySQLUser = KapitalSettings.getString(KapitalSettings.Str.MYSQL_USER);
 			MySQLPass = KapitalSettings.getString(KapitalSettings.Str.MYSQL_PASS);
@@ -31,7 +31,7 @@ public class MySQL {
 			MySQLStatement = MySQLConnection.createStatement();
 			MySQLConnection.setAutoCommit(true);
 		} catch (Exception e) {
-			plugin.consoleWarning("MySQL connection failed: " + e.toString());
+			k_Plugin.consoleWarning("MySQL connection failed: " + e.toString());
 		}
 	}
 
@@ -47,9 +47,9 @@ public class MySQL {
 		try {
 			getStatement().executeUpdate(sqlString);
 		} catch (Exception e) {
-			plugin.consoleWarning("The following statement failed: "
+			k_Plugin.consoleWarning("The following statement failed: "
 					+ sqlString);
-			plugin.consoleWarning("Statement failed: " + e.toString());
+			k_Plugin.consoleWarning("Statement failed: " + e.toString());
 		}
 	}
 
@@ -58,9 +58,9 @@ public class MySQL {
 			System.out.println(getStatement().toString());
 			return getStatement().executeQuery(sqlString);
 		} catch (Exception e) {
-			plugin.consoleWarning("The following statement failed: "
+			k_Plugin.consoleWarning("The following statement failed: "
 					+ sqlString);
-			plugin.consoleWarning("Statement failed: " + e.toString());
+			k_Plugin.consoleWarning("Statement failed: " + e.toString());
 		}
 		return null;
 	}

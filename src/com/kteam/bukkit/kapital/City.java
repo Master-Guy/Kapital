@@ -99,6 +99,7 @@ public class City {
 				}
 			} catch (Exception e) {
 	    		plugin.consoleWarning("startCity failed: "+e.toString());
+	    		e.printStackTrace();
 			}
 		} else
 			ply.sendMessage(newMayor.getName()+" is not online!");

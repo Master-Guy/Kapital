@@ -74,7 +74,7 @@ public class City {
 				rs = mysql.trySelect("select count(*) cnt from kapital__cities c where mayor = '"+newMayor.getName()+"'");
 				rs.next();
 				if (rs.getInt("cnt") > 0) {
-					ply.sendMessage(newMayor.getName()+" is already mayor of a city!");
+					k_Plugin.msg(ply, newMayor.getName()+" is already mayor of a city!");
 					newMayor.sendMessage(ply.getName()+" tried to start a city for you, but you are mayor already of a city!");
 					return null;
 				} else {
@@ -82,18 +82,17 @@ public class City {
 					rs = mysql.trySelect("select count(*) cnt from kapital__tiles t where x = "+tile.getX()+" and z = "+tile.getZ());
 					rs.next();
 					if(rs.getInt("cnt") > 0) {
-						ply.sendMessage("The location at which "+newMayor.getName()+" is standing, is already taken!");
+						k_Plugin.msg(ply, "The location at which "+newMayor.getName()+" is standing, is already taken!");
 						newMayor.sendMessage(ply.getName()+" tried to start a city for you, but the location you are standing is taken already!");
 						return null;
 					} else {
 						mysql.tryUpdate("insert into kapital__cities (name, mayor) values('"+newCityName+"', '"+newMayor.getName()+"')");
 						rs = mysql.trySelect("select id from kapital__cities c where mayor = '"+newMayor.getName()+"'");
 						rs.next();
-						/*debug*/k_Plugin.consoleLog(String.valueOf(rs.getInt("id")));
 						mysql.tryUpdate("insert into kapital__player_cities (city_id, player_id, player_level) values("+rs.getInt("id")+", "+checkPlayer(newMayor.getName())+", "+cityLevels.get("mayor")+")");
-						mysql.tryUpdate("insert into kapital__tiles (x, z, city_id) values("+tile.getX()+", "+tile.getZ()+", "+rs.getInt("id")+")");
+						mysql.tryUpdate("insert into kapital__tiles (x, z, city_id) values("+tile.getX()+", "+tile.getZ()+", "+String.valueOf(rs.getInt("id"))+")");
 						newMayor.sendMessage("The city "+newCityName+" has been created at your current location. Type '/city help' for more information.");
-						ply.sendMessage("The city "+newCityName+" has been created with "+newMayor.getName()+" as mayor");
+						k_Plugin.msg(ply, "The city "+newCityName+" has been created with "+newMayor.getName()+" as mayor");
 						this.setMayor(newMayor);
 						return city;
 					}
@@ -103,7 +102,7 @@ public class City {
 	    		e.printStackTrace();
 			}
 		} else
-			ply.sendMessage(newMayor.getName()+" is not online!");
+			k_Plugin.msg(ply, newMayor.getName()+" is not online!");
 		return city;
 	}
 }

@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
  */
 
 public class City {
-    private final Kapital plugin;
+    private final Kapital k_Plugin;
     private final KapitalWorld kapitalWorld;
     private HashMap<String, Integer> cityLevels = new HashMap<String, Integer>();
     private MySQL mysql;
@@ -20,10 +20,10 @@ public class City {
     public Player mayor;
     public Integer mayorId;
     
-	public City(Kapital plugin, Player founder, String cityName, String mayorName) {
-		this.plugin = plugin;
-		this.kapitalWorld = plugin.getKapitalWorld();
-		mysql = new MySQL(plugin);
+	public City(Kapital instance, Player founder, String cityName, String mayorName) {
+		this.k_Plugin = instance;
+		this.kapitalWorld = k_Plugin.getKapitalWorld();
+		mysql = new MySQL(k_Plugin);
 	    cityLevels.put("inhabitant", 1);
 	    cityLevels.put("council", 2);
 	    cityLevels.put("mayor", 3);
@@ -39,7 +39,7 @@ public class City {
     		rs.next();
     		return rs.getInt("id");
     	} catch (Exception e) {
-    		plugin.consoleWarning("checkPlayer failed: "+e.toString());
+    		k_Plugin.consoleWarning("checkPlayer failed: "+e.toString());
     	}
     	return -1;
     }
@@ -78,7 +78,7 @@ public class City {
 					newMayor.sendMessage(ply.getName()+" tried to start a city for you, but you are mayor already of a city!");
 					return null;
 				} else {
-					Chunk tile = this.plugin.getServer().getWorlds()[0].getChunkAt(newMayor.getLocation().getBlockX(), newMayor.getLocation().getBlockZ());
+					Chunk tile = this.k_Plugin.getServer().getWorlds()[0].getChunkAt(newMayor.getLocation().getBlockX(), newMayor.getLocation().getBlockZ());
 					rs = mysql.trySelect("select count(*) cnt from kapital__tiles t where x = "+tile.getX()+" and z = "+tile.getZ());
 					rs.next();
 					if(rs.getInt("cnt") > 0) {
@@ -89,6 +89,7 @@ public class City {
 						mysql.tryUpdate("insert into kapital__cities (name, mayor) values('"+newCityName+"', '"+newMayor.getName()+"')");
 						rs = mysql.trySelect("select id from kapital__cities c where mayor = '"+newMayor.getName()+"'");
 						rs.next();
+						/*debug*/k_Plugin.consoleLog(String.valueOf(rs.getInt("id")));
 						mysql.tryUpdate("insert into kapital__player_cities (city_id, player_id, player_level) values("+rs.getInt("id")+", "+checkPlayer(newMayor.getName())+", "+cityLevels.get("mayor")+")");
 						mysql.tryUpdate("insert into kapital__tiles (x, z, city_id) values("+tile.getX()+", "+tile.getZ()+", "+rs.getInt("id")+")");
 						newMayor.sendMessage("The city "+newCityName+" has been created at your current location. Type '/city help' for more information.");
@@ -98,7 +99,7 @@ public class City {
 					}
 				}
 			} catch (Exception e) {
-	    		plugin.consoleWarning("startCity failed: "+e.toString());
+	    		k_Plugin.consoleWarning("startCity failed: "+e.toString());
 	    		e.printStackTrace();
 			}
 		} else

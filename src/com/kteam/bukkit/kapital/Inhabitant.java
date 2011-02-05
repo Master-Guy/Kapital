@@ -5,7 +5,9 @@ public class Inhabitant extends KapitalObject {
     
 	public Inhabitant(Kapital instance) {
 		k_Plugin = instance;
-		
-		
 	}
+    
+    public void debug(String msg) {
+    	this.k_Plugin.debug(msg);
+    }
 }

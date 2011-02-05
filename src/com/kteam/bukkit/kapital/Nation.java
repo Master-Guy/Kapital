@@ -11,7 +11,9 @@ public class Nation extends KapitalObject {
     
 	public Nation(Kapital instance) {
 		k_Plugin = instance;
-		
-		
 	}
+    
+    public void debug(String msg) {
+    	this.k_Plugin.debug(msg);
+    }
 }

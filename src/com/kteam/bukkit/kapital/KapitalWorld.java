@@ -14,6 +14,10 @@ public class KapitalWorld extends KapitalObject {
 		plugin = instance;
 	}
     
+    public void debug(String msg) {
+    	this.plugin.debug(msg);
+    }
+    
     public Player[] getOnlinePlayers() {
 		return plugin.getServer().getOnlinePlayers();
 	}

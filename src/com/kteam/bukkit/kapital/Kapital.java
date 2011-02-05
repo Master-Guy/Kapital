@@ -23,6 +23,8 @@ import org.bukkit.command.CommandSender;
  */
 
 public class Kapital extends JavaPlugin {
+	public boolean debugging = true;
+	
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
     
     public String name;
@@ -111,6 +113,12 @@ public class Kapital extends JavaPlugin {
     	log.severe("[" + name + "] v" + version + " - " + msg);
     }
     
+    public void debug(String msg) {
+    	if(debugging) {
+    		System.out.println("[DBG " + name + "] "+msg);
+    	}
+    }
+    
     private boolean anonymousCheck(CommandSender sender) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("Cannot execute that command, I don't know who you are!");
@@ -151,37 +159,6 @@ public class Kapital extends JavaPlugin {
         }
         return false;
     }
-    
-
-        /*if (commandName.equalsIgnoreCase("nation")) {
-            if (split.length == 0) {
-            	msg(sender, "Info on nations"); // TODO
-                return true;
-            } else if (split[0].equalsIgnoreCase("list")) {
-        		msg(sender, "List of nations"); // TODO
-        		return true;
-            }
-        } else if (commandName.equalsIgnoreCase("city")) {
-        	if (split.length == 0) {
-            	msg(sender, "Info on cities"); // TODO
-                return true;
-            } else if (split[0].equalsIgnoreCase("list")) {
-            	if (split.length == 1) {
-            		msg(sender, "List of cities"); // TODO
-            		return true;
-            	} else if (split.length == 2) {
-            		msg(sender, "List of cities in nation " + split[1]); // TODO
-            		return true;
-            	}
-            } else if (split[0].equalsIgnoreCase("start")) {
-            	if (split.length == 3) {
-            		kapitalWorld.startCity(sender, split[1], split[2]);
-                    return true;
-                } else
-                	return false;
-            }
-        }*/
-    
     
     // DEBUGGING
     public boolean isDebugging(final Player player) {

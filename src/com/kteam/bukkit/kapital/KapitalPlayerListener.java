@@ -27,6 +27,10 @@ public class KapitalPlayerListener extends PlayerListener {
         //Tile = new Tile(plugin);
     }
     
+    public void debug(String msg) {
+    	this.plugin.debug(msg);
+    }
+    
     	// Old code
     	/*if (split[0].equalsIgnoreCase(Settings.getSetting("settings/kapital.ini", "buyPlotCommand", "/buyTile")[0])) {
     		event.getPlayer().sendMessage("Executing buyPlot");

@@ -21,6 +21,10 @@ public class Tile {
 	public Tile(Kapital instance) {
 		k_Plugin = instance;
 	}
+    
+    public void debug(String msg) {
+    	this.k_Plugin.debug(msg);
+    }
 	
 	private HashMap<String, String> plots = new HashMap<String, String>();
 	private Integer plotsBought = 0;

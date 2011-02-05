@@ -125,7 +125,7 @@ public class City {
 		} else {
 			debug("Mayor is not online");
 			k_Plugin.msg(ply, newMayor.getName()+" is not online!");
-			throw new StandardException();
+			throw new StandardException("Could not start city since mayor is offline.");
 		}
 		return city;
 	}

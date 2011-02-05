@@ -20,6 +20,10 @@ public class KapitalBlockListener extends BlockListener {
         this.plugin = plugin;
     }
     
+    public void debug(String msg) {
+    	this.plugin.debug(msg);
+    }
+    
     public void logToAll(String logText) {
     	System.out.println(logText);
     	I = 0;

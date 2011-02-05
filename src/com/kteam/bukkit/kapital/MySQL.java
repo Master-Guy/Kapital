@@ -34,6 +34,10 @@ public class MySQL {
 			k_Plugin.consoleWarning("MySQL connection failed: " + e.toString());
 		}
 	}
+    
+    public void debug(String msg) {
+    	this.k_Plugin.debug(msg);
+    }
 
 	public Connection getConnection() {
 		return MySQLConnection;

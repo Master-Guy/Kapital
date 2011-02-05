@@ -23,6 +23,8 @@ import org.bukkit.command.CommandSender;
  */
 
 public class Kapital extends JavaPlugin {
+	public boolean debugging = true;
+	
 	public static final Logger log = Logger.getLogger("Minecraft"); // Logger
     
     public String name;
@@ -72,7 +74,7 @@ public class Kapital extends JavaPlugin {
     
     private void createTables() {
     	sql = new MySQL(this);
-    	sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__cities` (`id` int(11) NOT NULL auto_increment,`mayor` varchar(30) NOT NULL,`welcome` varchar(100) default NULL,`farewell` varchar(100) default NULL,`free_build` tinyint(1) NOT NULL default '0',`nation` int(11) default NULL,PRIMARY KEY  (`id`))");
+    	sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__cities` (`id` int(11) NOT NULL auto_increment,`name` varchar(100) NOT NULL,`mayor` varchar(30) NOT NULL,`welcome` varchar(100) default NULL,`farewell` varchar(100) default NULL,`free_build` tinyint(1) NOT NULL default '0',`nation` int(11) default NULL,PRIMARY KEY  (`id`))");
     	sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nations` (`id` int(11) NOT NULL auto_increment,`name` varchar(100) NOT NULL,`gov_type` tinyint(2) NOT NULL,`leader_id` int(11) NOT NULL,PRIMARY KEY  (`id`))");
 		sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nation_cities` (`nation_id` int(11) NOT NULL,`city_id` int(11) NOT NULL)");
 		sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nation_relations` (`nation1_id` int(11) NOT NULL,`nation2_id` int(11) NOT NULL,`relation` tinyint(2) NOT NULL)");
@@ -109,6 +111,12 @@ public class Kapital extends JavaPlugin {
     
     public void consoleError(String msg) {
     	log.severe("[" + name + "] v" + version + " - " + msg);
+    }
+    
+    public void debug(String msg) {
+    	if(debugging) {
+    		System.out.println("[DBG " + name + "] "+msg);
+    	}
     }
     
     private boolean anonymousCheck(CommandSender sender) {
@@ -151,37 +159,6 @@ public class Kapital extends JavaPlugin {
         }
         return false;
     }
-    
-
-        /*if (commandName.equalsIgnoreCase("nation")) {
-            if (split.length == 0) {
-            	msg(sender, "Info on nations"); // TODO
-                return true;
-            } else if (split[0].equalsIgnoreCase("list")) {
-        		msg(sender, "List of nations"); // TODO
-        		return true;
-            }
-        } else if (commandName.equalsIgnoreCase("city")) {
-        	if (split.length == 0) {
-            	msg(sender, "Info on cities"); // TODO
-                return true;
-            } else if (split[0].equalsIgnoreCase("list")) {
-            	if (split.length == 1) {
-            		msg(sender, "List of cities"); // TODO
-            		return true;
-            	} else if (split.length == 2) {
-            		msg(sender, "List of cities in nation " + split[1]); // TODO
-            		return true;
-            	}
-            } else if (split[0].equalsIgnoreCase("start")) {
-            	if (split.length == 3) {
-            		kapitalWorld.startCity(sender, split[1], split[2]);
-                    return true;
-                } else
-                	return false;
-            }
-        }*/
-    
     
     // DEBUGGING
     public boolean isDebugging(final Player player) {

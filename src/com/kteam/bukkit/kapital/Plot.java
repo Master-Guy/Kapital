@@ -12,8 +12,10 @@ public class Plot {
     
 	public Plot(Kapital instance) {
 		k_Plugin = instance;
-		
-		
 	}
+    
+    public void debug(String msg) {
+    	this.k_Plugin.debug(msg);
+    }
 	
 }

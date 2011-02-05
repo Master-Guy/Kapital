@@ -10,8 +10,8 @@ public class KapitalWorld extends KapitalObject {
 	private HashMap<String, City> cities = new HashMap<String, City>();
 	private HashMap<String, Nation> nations = new HashMap<String, Nation>();
     
-	public KapitalWorld(Kapital plugin) {
-		this.plugin = plugin;
+	public KapitalWorld(Kapital instance) {
+		plugin = instance;
 	}
     
     public Player[] getOnlinePlayers() {
@@ -74,7 +74,14 @@ public class KapitalWorld extends KapitalObject {
 	    	player.sendMessage(line);
 	}
 	
-	public void startCity(Player founder, String name, String mayorName) {
-		cities.put(name, new City(plugin, founder, name, mayorName));
+	public Boolean startCity(Player founder, String name, String mayorName) {
+		try {
+			cities.put(name, new City(plugin, founder, name, mayorName));
+			return true;
+		} catch (Exception e) {
+			plugin.consoleWarning(founder + " couldn't create new city \"" + name + "\"!");
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

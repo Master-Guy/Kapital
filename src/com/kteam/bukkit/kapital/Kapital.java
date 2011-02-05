@@ -130,31 +130,43 @@ public class Kapital extends JavaPlugin {
     
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        String[] split = args;
         String commandName = command.getName().toLowerCase();
         Player player = null;
         
         if (commandName.equals("nation")) {
-            return true;//performTeleport(sender, trimmedArgs);
+            return true; // performTeleport(sender, trimmedArgs);
         } else if (commandName.equals("city")) {
-        	if (split.length == 0) {
-            	msg(sender, "Info on cities"); // TODO
+        	if (args.length == 0) {
+        		msg(sender, "The following commands are available:");
+        		msg(sender, " ");
+        		msg(sender, "/city start "+ChatColor.GOLD+"townname mayor"+ChatColor.DARK_GREEN+" - Creates a city");
+        		msg(sender, "/city list [page]"+ChatColor.DARK_GREEN+" - Lists all created cities and mayors");
+        		msg(sender, "/city info"+ChatColor.DARK_GREEN+" - Show information about your city");
+        		msg(sender, "/city set"+ChatColor.DARK_GREEN+" - Show information about managing your city");
                 return true;
-            } else if (split[0].equalsIgnoreCase("list")) {
-            	if (split.length == 1) {
-            		msg(sender, "List of cities"); // TODO
-            		return true;
-            	} else if (split.length == 2) {
-            		msg(sender, "List of cities in nation " + split[1]); // TODO
-            		return true;
+            } else if (args[0].equalsIgnoreCase("list")) {
+            	Integer pageNr = 1;
+            	if (args.length > 1) {
+            		try {
+            			pageNr = Integer.parseInt(args[1]);
+            		} catch (Exception e) {
+            			pageNr = 1;
+            		}
             	}
-            } else if (split[0].equalsIgnoreCase("start")) {
-            	if (split.length == 3) {
+        		msg(sender, "Show list of cities - page #"+pageNr); // TODO
+        		return true;
+            } else if (args[0].equalsIgnoreCase("start")) {
+            	if (args.length == 3) {
             		if (anonymousCheck(sender)) return false;
                     player = (Player)sender;
-            		return kapitalWorld.startCity(player, split[1], split[2]);
-                } else
+            		return kapitalWorld.startCity(player, args[1], args[2]);
+                } else {
+            		msg(sender, "This command requires two special parameters:");
+            		msg(sender, "/city start "+ChatColor.GOLD+"Townname Mayor");
+            		msg(sender, "Townname"+ChatColor.DARK_GREEN+" - The name of the new town");
+            		msg(sender, "Mayor"+ChatColor.DARK_GREEN+" - The name of the player that will be mayor");
                 	return false;
+                }
             }
         }
         return false;

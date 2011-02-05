@@ -1,10 +1,10 @@
 package com.kteam.bukkit.kapital;
 
 public class Inhabitant extends KapitalObject {
-    private final Kapital plugin;
+    private final Kapital k_Plugin;
     
-	public Inhabitant(Kapital plugin) {
-		this.plugin = plugin;
+	public Inhabitant(Kapital instance) {
+		k_Plugin = instance;
 		
 		
 	}

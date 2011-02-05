@@ -16,10 +16,10 @@ public class Tile {
 	//private int x, z;
 	//private City city; //Where does the tile belong to?
 
-    private final Kapital plugin;
+    private final Kapital k_Plugin;
     
-	public Tile(Kapital plugin) {
-		this.plugin = plugin;
+	public Tile(Kapital instance) {
+		k_Plugin = instance;
 	}
 	
 	private HashMap<String, String> plots = new HashMap<String, String>();
@@ -34,14 +34,14 @@ public class Tile {
 		playerLoc = event.getPlayer().getLocation();
 		plots.put("plot"+plotsBought+"_pox_x", ""+playerLoc.getWorld().getChunkAt(playerLoc.getBlockX(), playerLoc.getBlockZ()).getX());
 		plots.put("plot"+plotsBought+"_pox_z", ""+playerLoc.getWorld().getChunkAt(playerLoc.getBlockX(), playerLoc.getBlockZ()).getZ());
-		plot = this.plugin.getServer().getWorlds()[0].getChunkAt(Integer.parseInt(plots.get("plot"+plotsBought+"_pox_x")), Integer.parseInt(plots.get("plot"+plotsBought+"_pox_z")));
+		plot = this.k_Plugin.getServer().getWorlds()[0].getChunkAt(Integer.parseInt(plots.get("plot"+plotsBought+"_pox_x")), Integer.parseInt(plots.get("plot"+plotsBought+"_pox_z")));
 		plotsBought = plotsBought + 1;
 	}
 	
 	public void displayTileXZ(PlayerChatEvent event) {
 		playerLoc = event.getPlayer().getLocation();
-		topBlock = this.plugin.getServer().getWorlds()[0].getBlockAt(playerLoc.getBlockX(), playerLoc.getBlockY(), playerLoc.getBlockZ());
-		plot = this.plugin.getServer().getWorlds()[0].getChunkAt(topBlock);
+		topBlock = this.k_Plugin.getServer().getWorlds()[0].getBlockAt(playerLoc.getBlockX(), playerLoc.getBlockY(), playerLoc.getBlockZ());
+		plot = this.k_Plugin.getServer().getWorlds()[0].getChunkAt(topBlock);
 		event.getPlayer().sendMessage("Your plot is at: X"+plot.getX()+"/Z"+plot.getZ());
 	}
 }

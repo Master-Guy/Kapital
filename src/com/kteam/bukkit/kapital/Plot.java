@@ -8,10 +8,10 @@ package com.kteam.bukkit.kapital;
  */
 public class Plot {
 //	private City city; //Where does the plot belong to?
-    private final Kapital plugin;
+    private final Kapital k_Plugin;
     
-	public Plot(Kapital plugin) {
-		this.plugin = plugin;
+	public Plot(Kapital instance) {
+		k_Plugin = instance;
 		
 		
 	}

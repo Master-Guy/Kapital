@@ -7,10 +7,10 @@ package com.kteam.bukkit.kapital;
  */
 
 public class Nation extends KapitalObject {
-    private final Kapital plugin;
+    private final Kapital k_Plugin;
     
-	public Nation(Kapital plugin) {
-		this.plugin = plugin;
+	public Nation(Kapital instance) {
+		k_Plugin = instance;
 		
 		
 	}

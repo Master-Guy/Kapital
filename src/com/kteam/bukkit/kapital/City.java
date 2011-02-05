@@ -90,7 +90,7 @@ public class City {
 						rs = mysql.trySelect("select id from kapital__cities c where mayor = '"+newMayor.getName()+"'");
 						rs.next();
 						mysql.tryUpdate("insert into kapital__player_cities (city_id, player_id, player_level) values("+rs.getInt("id")+", "+checkPlayer(newMayor.getName())+", "+cityLevels.get("mayor")+")");
-						mysql.tryUpdate("insert into kapital__tiles (x, z, city_id) values("+tile.getX()+", "+tile.getZ()+", "+String.valueOf(rs.getInt("id"))+")");
+						mysql.tryUpdate("insert into kapital__tiles (x, z, city_id) values("+tile.getX()+", "+tile.getZ()+", "+rs.getInt("id")+")");
 						newMayor.sendMessage("The city "+newCityName+" has been created at your current location. Type '/city help' for more information.");
 						k_Plugin.msg(ply, "The city "+newCityName+" has been created with "+newMayor.getName()+" as mayor");
 						this.setMayor(newMayor);

@@ -54,7 +54,14 @@ public class Kapital extends JavaPlugin {
 		if (!k_Folder.exists())
 			k_Folder.mkdir();
     	KapitalSettings.loadConfig();
-    	createTables();
+    	
+    	try {
+    		createTables();
+    	} catch (Exception e) {
+			consoleWarning("Failed to check database tables exist: "+e.toString());
+			e.printStackTrace();
+			getServer().getPluginManager().disablePlugin(this);
+		}
 
     	log.info("[" + name + "] v" + version + " - Loaded and Enabled");
     }
@@ -64,6 +71,7 @@ public class Kapital extends JavaPlugin {
     }
     
     private void createTables() {
+    	sql = new MySQL(this);
     	sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__cities` (`id` int(11) NOT NULL auto_increment,`mayor` varchar(30) NOT NULL,`welcome` varchar(100) default NULL,`farewell` varchar(100) default NULL,`free_build` tinyint(1) NOT NULL default '0',`nation` int(11) default NULL,PRIMARY KEY  (`id`))");
     	sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nations` (`id` int(11) NOT NULL auto_increment,`name` varchar(100) NOT NULL,`gov_type` tinyint(2) NOT NULL,`leader_id` int(11) NOT NULL,PRIMARY KEY  (`id`))");
 		sql.tryUpdate("CREATE TABLE IF NOT EXISTS `kapital__nation_cities` (`nation_id` int(11) NOT NULL,`city_id` int(11) NOT NULL)");

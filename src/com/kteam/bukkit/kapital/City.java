@@ -27,11 +27,7 @@ public class City {
 	    cityLevels.put("inhabitant", 1);
 	    cityLevels.put("council", 2);
 	    cityLevels.put("mayor", 3);
-		try {
-			startCity(founder, cityName, mayorName);
-		} catch (StandardException e) {
-			e.printStackTrace();
-		}
+		startCity(founder, cityName, mayorName);
 	};
     
     public void debug(String msg) {
@@ -62,7 +58,7 @@ public class City {
     	return this.mayor;
     }
 	
-	public City startCity(Player ply, String newCityName, String newMayorName) throws StandardException {
+	public City startCity(Player ply, String newCityName, String newMayorName) {
 		boolean newMayorIsOnline;
 		debug("Starting city "+newCityName+" for "+newMayorName);
 		City city;
@@ -124,8 +120,7 @@ public class City {
 			}
 		} else {
 			debug("Mayor is not online");
-			k_Plugin.msg(ply, newMayor.getName()+" is not online!");
-			throw new StandardException("Could not start city since mayor is offline.");
+			k_Plugin.msg(ply, newMayorName + " is not online!");
 		}
 		return city;
 	}
